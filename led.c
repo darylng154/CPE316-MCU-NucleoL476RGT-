@@ -3,7 +3,14 @@
  *
  *  Created on: Oct 16, 2022
  *      Author: Daru
+ *
+ *      Code to LED Layout (LED3-LED2-LED1-LED0):
+ * LED0 = [PC9		PC8] = LED1
+ * LED2 = [PB8		PC6] = LED3
  */
+
+#include "main.h"
+#include <stdint.h>
 
 void led_init()
 {

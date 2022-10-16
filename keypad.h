@@ -17,9 +17,4 @@ void keypad_init();
 // polls for single input at a time
 uint8_t keypad_read();
 
-void led_init();
-
-// Decodes keypad_read() returns into LEDs
-void decodeLED(uint8_t readNum);
-
 #endif /* SRC_KEYPAD_H_ */

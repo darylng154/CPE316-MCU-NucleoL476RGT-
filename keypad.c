@@ -8,16 +8,11 @@
  *		MEMBRANE Physical Keypad Pins: R1|R2|R3|R4|C1|C2|C3|C4
  *
  *      Code to MEMBRANE Keypad Board Layout:
- * R3 = [PH0		PA1] = R2
- * R4 = [PH1		PA4] = R1
+ * R1 = [PH0		PA1] = C1
+ * R2 = [PH1		PA4] = C2
  * 		[			   ]
- * R3 = [PC2		PC1] = R2
- * R4 = [PC3		PC0] = R1
- *
- *
- *      Code to LED Layout (LED3-LED2-LED1-LED0):
- * LED0 = [PC9		PC8] = LED1
- * LED2 = [PB8		PC6] = LED3
+ * R3 = [PC2		PC1] = C3
+ * R4 = [PC3		PC0] = C4
  *
 */
 
@@ -166,7 +161,8 @@ uint8_t mapKeys(uint8_t onColumn, uint8_t onRow)
 uint8_t isKeyPressed()
 {
 	// checks if any rows are activated
-	if((GPIOH->IDR & GPIO_PIN_0) || (GPIOH->IDR & GPIO_PIN_1) || (GPIOC->IDR & GPIO_PIN_2) || (GPIOC->IDR & GPIO_PIN_3))
+	if( (GPIOH->IDR & GPIO_PIN_0) || (GPIOH->IDR & GPIO_PIN_1) ||
+		(GPIOC->IDR & GPIO_PIN_2) || (GPIOC->IDR & GPIO_PIN_3) )
 		return 1;
 	else
 		return 0;
@@ -250,11 +246,8 @@ uint8_t keypad_read()
 				onRow = 3;
 			}
 
-			// checks if any rows are activated
-			if((GPIOH->IDR & GPIO_PIN_0) || (GPIOH->IDR & GPIO_PIN_1) || (GPIOC->IDR & GPIO_PIN_2) || (GPIOC->IDR & GPIO_PIN_3))
-			{
+			if(isKeyPressed())
 				return mapKeys(onColumn, onRow);
-			}
 		}
 	}
 	return -1;
